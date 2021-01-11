@@ -80,16 +80,22 @@ public class LinkedList {
         return n;
     }
 
-    private static int KthToLast2(Node n, int k){
-        if(n==null){
-            return 0;
-        }
-        int count = KthToLast2(n.next, k)+1;
-        if(count == k) {
-            System.out.println(k+ "th to last node is " + n.data);
-        }
-        return count;
+    private static class CountReference {
+        public int count = 0;
     }
+
+    private static Node KthToLast2(Node n, int k, CountReference r){
+        if(n==null){
+            return null;
+        }
+        Node found = KthToLast2(n.next, k, r);
+        r.count++;
+        if(r.count == k) {
+            return n;
+        }
+        return found; //같지 않을 경우, 이미 찾아서 반환 받은 값을 반환
+    }
+
 
     public static void main(String[] args) {
 
@@ -101,10 +107,10 @@ public class LinkedList {
         Link.append(4);
         Link.retrieve();
 
-        int k=3;
-        KthToLast2(Link.header,k);
-       // Node kth = KthToLast(Link.header,k);
-       // System.out.println("Last k("+k+")th data is "+kth.data);
+        int k=4;
+        CountReference r = new CountReference();
+        Node found = KthToLast2(Link.header, k, r);
+        System.out.println(found.data);
 
     }
 }
