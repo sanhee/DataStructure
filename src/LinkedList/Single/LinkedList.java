@@ -113,6 +113,32 @@ public class LinkedList {
         }
         return p2;
     }
+
+    private static boolean deleteNode(Node n){
+
+        if(n == null || n.next == null){
+            return false;
+        }
+
+        n.data = n.next.data;
+        n.next = n.next.next;
+
+        return true;
+    }
+
+    private Node get(int d) {
+
+        Node n = this.header;
+        while(n != null || n.next != null){
+            if(n.next.data == d){
+                return n.next;
+            }
+            n = n.next;
+        }
+
+        return n;
+    }
+
     public static void main(String[] args) {
 
         LinkedList Link = new LinkedList();
@@ -130,5 +156,12 @@ public class LinkedList {
         //System.out.println(found.data);
         System.out.println(found2.data);
 
+        System.out.println(Link.get(2).data);
+
+        boolean ch = deleteNode(Link.get(2));
+        Link.retrieve();
+
     }
+
+
 }
