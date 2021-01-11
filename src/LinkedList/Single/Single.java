@@ -52,7 +52,7 @@ public class Single{
         head.append(3);
         head.append(4);
         head.retrieve();
-        head.delete(3);
+        head.delete(1);
         head.retrieve();
     }
 }
