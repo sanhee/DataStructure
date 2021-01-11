@@ -49,7 +49,7 @@ public class LinkedList {
 
     }
 
-    void removeDups(){  //m 중복 데이터 삭제 함수
+    private void removeDups(){  //m 중복 데이터 삭제 함수
         Node n = header;
         while(n != null && n.next != null){ // 삭제후 n이 null일 수 있음
             Node r = n;
@@ -65,22 +65,46 @@ public class LinkedList {
         }
     }
 
+    private static Node KthToLast(Node first, int k){ //m K번째 노드를 찾는 알고리즘, 방법1
+        Node n = first;
+        int total = 1;
+
+        while(n.next != null){ // 마지막 노드에 가지 않으므로, total=1
+            total++;
+            n= n.next;
+        }
+        n= first;
+        for(int i=1; i<total-k+1;i++){ // k가 1이면 마지막 노드를 가져와야 하므로 +1
+            n = n.next;
+        }
+        return n;
+    }
+
+    private static int KthToLast2(Node n, int k){
+        if(n==null){
+            return 0;
+        }
+        int count = KthToLast2(n.next, k)+1;
+        if(count == k) {
+            System.out.println(k+ "th to last node is " + n.data);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
+
         LinkedList Link = new LinkedList();
 
         Link.append(1);
         Link.append(2);
-        Link.append(2);
-        Link.append(3);
         Link.append(3);
         Link.append(4);
-        Link.append(4);
-        Link.append(5);
         Link.retrieve();
 
-        Link.removeDups();
-        Link.retrieve();
-
+        int k=3;
+        KthToLast2(Link.header,k);
+       // Node kth = KthToLast(Link.header,k);
+       // System.out.println("Last k("+k+")th data is "+kth.data);
 
     }
 }
