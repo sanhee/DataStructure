@@ -49,17 +49,36 @@ public class LinkedList {
 
     }
 
+    void removeDups(){  //m 중복 데이터 삭제 함수
+        Node n = header;
+        while(n != null && n.next != null){ // 삭제후 n이 null일 수 있음
+            Node r = n;
+            while(r.next != null){ // 마지막 노드에는 가지않음.
+                if(n.data == r.next.data){ // 가리키는 노드가, 삭제할 노드 전
+                    r.next = r.next.next;
+                }
+                else{ // 중복이 없을 경우
+                    r = r.next;
+                }
+            }
+            n = n.next; // 다음 n으로 이동.
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList Link = new LinkedList();
 
         Link.append(1);
         Link.append(2);
+        Link.append(2);
+        Link.append(3);
         Link.append(3);
         Link.append(4);
+        Link.append(4);
         Link.append(5);
-
         Link.retrieve();
-        Link.delete(1);
+
+        Link.removeDups();
         Link.retrieve();
 
 
