@@ -96,7 +96,23 @@ public class LinkedList {
         return found; //같지 않을 경우, 이미 찾아서 반환 받은 값을 반환
     }
 
+    private static Node KthToLast3(Node first, int k){ // 공간 할당 없이, 2개의 포인터를 이용한 방법
+        Node p1 = first;
+        Node p2 = first;
 
+        for(int i = 0; i<k; i++){
+            if( p1 == null ) { // 뒤에서 k번째 값이 없다는 뜻
+                return null;
+            }
+            p1 = p1.next;
+        }
+
+        while(p1 != null){
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return p2;
+    }
     public static void main(String[] args) {
 
         LinkedList Link = new LinkedList();
@@ -107,10 +123,12 @@ public class LinkedList {
         Link.append(4);
         Link.retrieve();
 
-        int k=4;
-        CountReference r = new CountReference();
-        Node found = KthToLast2(Link.header, k, r);
-        System.out.println(found.data);
+        int k=1;
+        //CountReference r = new CountReference();
+        //Node found = KthToLast2(Link.header, k, r);
+        Node found2 = KthToLast3(Link.header, k);
+        //System.out.println(found.data);
+        System.out.println(found2.data);
 
     }
 }
