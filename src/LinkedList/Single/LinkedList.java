@@ -41,12 +41,10 @@ public class LinkedList {
     void retrieve(){
         Node n = header.next; //m 헤더는 출력하지 않기 위해서
         while ( n.next != null){
-
             System.out.print(n.data+" -> ");
             n = n.next;
         }
         System.out.println(n.data);
-
     }
 
     private void removeDups(){  //m 중복 데이터 삭제 함수
@@ -139,28 +137,45 @@ public class LinkedList {
         return n;
     }
 
+
+    private static Node Partition(Node n, int x){
+        Node head = n;
+        Node tail = n;
+
+        while( n != null ) {
+            Node next = n.next;
+            if(n.data < x){
+                n.next = head;
+                head = n;
+            }else{
+                tail.next = n;
+                tail = n;
+            }
+            n = next;
+        }
+        tail.next = null; // 마지막임을 표시하기 위해서
+        return head;
+    }
+
     public static void main(String[] args) {
 
         LinkedList Link = new LinkedList();
 
-        Link.append(1);
+        Link.append(7);
         Link.append(2);
+        Link.append(8);
+        Link.append(5);
         Link.append(3);
         Link.append(4);
+        Link.append(1);
         Link.retrieve();
 
-        int k=1;
-        //CountReference r = new CountReference();
-        //Node found = KthToLast2(Link.header, k, r);
-        Node found2 = KthToLast3(Link.header, k);
-        //System.out.println(found.data);
-        System.out.println(found2.data);
-
-        System.out.println(Link.get(2).data);
-
-        boolean ch = deleteNode(Link.get(2));
-        Link.retrieve();
-
+        Node n = Partition(Link.get(1),5 );
+        while(n.next != null){
+            System.out.print(n.data + " -> ");
+            n = n.next;
+        }
+        System.out.println(n.data);
     }
 
 
