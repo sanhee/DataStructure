@@ -9,21 +9,11 @@ public class CDTest {
         c.printAll();
         c.insertAfter("월", "수");
         c.printAll();
-        c.insertPrevious("수","화");
+        c.insertAfter("수", "목");
         c.printAll();
-        c.insertLast("목");
+        c.removeNode("목");
         c.printAll();
-        c.insertFront("일");
-        c.printAll();
-        c.removeAfter("일");
-        c.printAll();
-        c.removePrevious("목");
-        c.printAll();
-        c.removePrevious("일");
-        c.printAll();
-        c.removePrevious("일");
-        c.printAll();
-        c.removePrevious("일");
+        c.removeNode("월");
         c.printAll();
     }
 }

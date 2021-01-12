@@ -141,6 +141,32 @@ public class CDLinkedList<T> implements ICircularDoubleLinkedList<T>
         size++;
     }
 
+    @Override
+    public void removeNode(T target) {
+        CDNode<T> t = findNode(target);
+
+        if (last == null){
+            System.out.println("데이터가 없습니다.");
+        }
+        else if(size ==1){
+            last = null;
+            size--;
+        }
+        else {
+            CDNode<T> p = t.leftLink;
+            t = p.rightLink;
+
+            p.rightLink = t.rightLink;
+
+            if(t==last){ // target이 last 노드 일 수 있으므로
+                last = t.rightLink;
+            }
+
+            size--;
+        }
+
+    }
+
     //
     @Override
     public void removeAfter(T target) {
